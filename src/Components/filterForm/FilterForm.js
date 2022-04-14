@@ -2,12 +2,20 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterMovie } from "../../redux/actions/moviesActions";
 
+/**
+ * It's a form that filters movies based on their category.
+ * @returns The return is a fieldset with a legend and a label.
+ */
 function FilterForm() {
   const [searchArray, setSearchArray] = useState([]);
   const dispatch = useDispatch();
 
   const { movies } = useSelector((state) => state.movies);
 
+/**
+ * It returns an array of all the unique categories in the movies array.
+ * @returns An array of all the categories of movies.
+ */
   const getAllMoviesCategories = () => {
     const moviesCategories = [];
     for (const movie of movies) {
@@ -17,7 +25,11 @@ function FilterForm() {
     return moviesCategories;
   };
 
-
+  /**
+   * If the checkbox is checked, add the value of the checkbox to the search array, otherwise delete the
+   * value of the checkbox from the search array.
+   * @param e - the event object
+   */
   const filterMoviesHandler = (e) => {
     const checked = e.target.checked;
     const searchValue = e.target.value;
@@ -26,13 +38,21 @@ function FilterForm() {
       : deleteFromSearchArray(searchValue);
   };
 
+  /**
+   * If the searchValue is not already in the searchArray, then add it to the searchArray.
+   * @param searchValue - The value of the input field
+   */
   const addToSearchArray = (searchValue) => {
     !searchArray.includes(searchValue) &&
       setSearchArray((oldArray) => [...oldArray, searchValue]);
   };
 
+  /**
+   * It takes a searchValue as an argument and returns a new array that is the same as the old array
+   * except for the item that matches the searchValue.
+   * @param searchValue - The value of the input field
+   */
   const deleteFromSearchArray = (searchValue) => {
-    console.log("delete");
     setSearchArray(searchArray.filter((item) => item !== searchValue));
   };
 

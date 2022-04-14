@@ -4,6 +4,11 @@ import { useDispatch } from "react-redux";
 import { deleteMovie } from "../../redux/actions/moviesActions";
 import { LikeDislike } from "../likeDislike/LikeDislike";
 
+/**
+ * It's a function that takes in a movieData object as a prop and returns a section with a title, a
+ * close button, a category, and a LikeDislike component.
+ * @returns A React component that renders a movie card.
+ */
 function MovieCard({ movieData }) {
   const { id, title, category } = movieData;
   const dispatch = useDispatch();

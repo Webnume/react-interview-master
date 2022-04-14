@@ -2,6 +2,7 @@ const initialState = {
   movies: [],
   filteredMovies: [],
 };
+
 const moviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_MOVIE":
