@@ -1,0 +1,28 @@
+.reviews {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+  background-color: rgb(255, 255, 255);
+  padding: 0.2rem;
+  .like {
+    &::before {
+      cursor: pointer;
+      font-family: "Font Awesome 5 Free";
+      display: inline-block;
+      content: "\f164";
+      padding: 0 0.2rem;
+    }
+  }
+  .dislike {
+    &::before {
+      cursor: pointer;
+      font-family: "Font Awesome 5 Free";
+      content: "\f164";
+      display: inline-block;
+      transform: rotate(180deg);
+      padding: 0 0.2rem;
+    }
+  }
+}
