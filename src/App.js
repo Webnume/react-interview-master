@@ -8,7 +8,11 @@ import { getMovies } from "./redux/actions/moviesActions";
 
 function App() {
   const dispatch = useDispatch();
-  const { movies } = useSelector((state) => state);
+  const { movies, filteredMovies } = useSelector((state) => state.movies);
+
+  const moviesToDisplay = filteredMovies.length > 0 ? filteredMovies : movies;
+
+  // console.log(moviesToDisplay);
   // console.log(movies);
   const [offset, setOffset] = useState(0);
   const [data, setData] = useState([]);
@@ -20,19 +24,19 @@ function App() {
     setOffset(selectedPage + 1);
   };
   const getData = async () => {
-    const slice = movies.slice(offset, offset + perPage);
+    const slice = moviesToDisplay.slice(offset, offset + perPage);
     const postData = slice.map((movie) => (
       <div key={movie.id} id={movie.id}>
         <MovieCard movieData={movie} />
       </div>
     ));
     setData(postData);
-    setPageCount(Math.ceil(movies.length / perPage));
+    setPageCount(Math.ceil(moviesToDisplay.length / perPage));
   };
 
   useEffect(() => {
     getData();
-  }, [offset, movies, perPage]);
+  }, [offset, moviesToDisplay, perPage]);
 
   useEffect(() => {
     dispatch(getMovies());
@@ -41,13 +45,15 @@ function App() {
   return (
     <div className="App">
       <h1>MY VIDEO LIST</h1>
-      <FilterForm moviesData={movies} />
-      <ul className="per-page">
-        Afficher les résultats par
-        <li onClick={() => setperPage(4)}>4</li>
-        <li onClick={() => setperPage(8)}>8</li>
-        <li onClick={() => setperPage(12)}>12</li>
-      </ul>
+      <FilterForm moviesData={moviesToDisplay} />
+      {moviesToDisplay.length > 0 && (
+        <ul className="per-page">
+          Afficher les résultats par
+          <li onClick={() => setperPage(4)}>4</li>
+          <li onClick={() => setperPage(8)}>8</li>
+          <li onClick={() => setperPage(12)}>12</li>
+        </ul>
+      )}
       <div className="movieWrapper">
         {/* {movies.map((movie) => (
           <div key={movie.id} id={movie.id}>
@@ -56,19 +62,21 @@ function App() {
         ))} */}
         {data}
       </div>
-      <ReactPaginate
-        previousLabel={"prev"}
-        nextLabel={"next"}
-        breakLabel={"..."}
-        breakClassName={"break-me"}
-        pageCount={pageCount}
-        marginPagesDisplayed={2}
-        pageRangeDisplayed={5}
-        onPageChange={handlePageClick}
-        containerClassName={"pagination"}
-        // subContainerClassName={"pages pagination"}
-        activeClassName={"active"}
-      />
+      {moviesToDisplay.length > 0 && (
+        <ReactPaginate
+          previousLabel={"prev"}
+          nextLabel={"next"}
+          breakLabel={"..."}
+          breakClassName={"break-me"}
+          pageCount={pageCount}
+          marginPagesDisplayed={2}
+          pageRangeDisplayed={5}
+          onPageChange={handlePageClick}
+          containerClassName={"pagination"}
+          // subContainerClassName={"pages pagination"}
+          activeClassName={"active"}
+        />
+      )}
     </div>
   );
 }

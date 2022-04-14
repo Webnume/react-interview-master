@@ -1,24 +1,40 @@
-const moviesReducer = (movies = [], action) => {
+const initialState = {
+  movies: [],
+  filteredMovies: [],
+};
+const moviesReducer = (state = initialState, action) => {
   switch (action.type) {
     case "GET_MOVIE":
-      return action.movies;
-    case "DELETE_MOVIE":
-      return movies.filter((movie) => movie.id !== action.payload);
-    case "FILTER_MOVIE":
-      // const filteredMovies = [...movies].filter(
-      //   (movie) => movie.category === action.payload
-      // // );
-      // return filteredMovies.length > 0 ? filteredMovies : action.movies;
+      return {
+        ...state,
+        movies: action.movies,
+      };
 
-      // return movies.filter((item) => item !== action.payload)
-      let filtered = action.movies.filter((movie) =>
-        action.categories.indexOf(movie.categories)
-      );
-      console.log(action.movies, action.categories);
-      return filtered;
+    case "DELETE_MOVIE":
+      return {
+        ...state,
+        movies: state.movies.filter((movie) => movie.id !== action.id),
+        filteredMovies: state.filteredMovies.filter(
+          (movie) => movie.id !== action.id
+        ),
+      };
+    case "FILTER_MOVIE":
+      const filteredData = [];
+      for (const searchValue of action.searchArray) {
+        const filteredPartial = state.movies.filter(
+          (movie) => movie.category === searchValue
+        );
+        filteredData.push(filteredPartial);
+      }
+      const result = filteredData.reduce((r, e) => (r.push(...e), r), []);
+
+      return {
+        ...state,
+        filteredMovies: result,
+      };
 
     default:
-      return movies;
+      return state;
   }
 };
 

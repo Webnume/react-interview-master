@@ -2,24 +2,23 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterMovie } from "../../redux/actions/moviesActions";
 
-function FilterForm({ moviesData }) {
-  const cloneMoviesData = [...moviesData];
+function FilterForm() {
   const [searchArray, setSearchArray] = useState([]);
-
   const dispatch = useDispatch();
 
-  //   console.log(moviesData);
+  const { movies } = useSelector((state) => state.movies);
 
   const getAllMoviesCategories = () => {
     const moviesCategories = [];
-    for (const movie of moviesData) {
+    for (const movie of movies) {
       !moviesCategories.includes(movie.category) &&
         moviesCategories.push(movie.category);
     }
     return moviesCategories;
   };
 
-  const filterMovies = (e) => {
+
+  const filterMoviesHandler = (e) => {
     const checked = e.target.checked;
     const searchValue = e.target.value;
     checked
@@ -30,44 +29,37 @@ function FilterForm({ moviesData }) {
   const addToSearchArray = (searchValue) => {
     !searchArray.includes(searchValue) &&
       setSearchArray((oldArray) => [...oldArray, searchValue]);
-    console.log(searchArray.length);
-    dispatch(filterMovie(moviesData, searchArray));
   };
 
   const deleteFromSearchArray = (searchValue) => {
     console.log("delete");
-    const newsearchArray = searchArray.filter((item) => item !== searchValue);
-    setSearchArray(newsearchArray);
-    dispatch(filterMovie(moviesData, searchArray));
+    setSearchArray(searchArray.filter((item) => item !== searchValue));
   };
 
-  //   useEffect(() => {
-  //     dispatch(filterMovie());
-  //   }, []);
   useEffect(() => {
-    console.log(searchArray);
-  }, [searchArray]);
+    dispatch(filterMovie(searchArray));
+  }, [searchArray, dispatch]);
 
   return (
-    <form>
-      <fieldset style={{ float: "left" }}>
-        <legend>Choose category to show</legend>
-        {!(getAllMoviesCategories().length === 0) ? (
-          getAllMoviesCategories().map((c, i) => (
-            <label key={c}>
-              <input
-                type="checkbox"
-                value={c}
-                onChange={(e) => filterMovies(e)}
-              />
-              {c}
-            </label>
-          ))
-        ) : (
-          <p>No film in dataBase</p>
-        )}
-      </fieldset>
-    </form>
+    <fieldset style={{ float: "left" }}>
+      <legend>Choose category to show</legend>
+      {!(getAllMoviesCategories().length === 0) ? (
+        getAllMoviesCategories().map((c, i) => (
+          <label key={c}>
+            <input
+              type="checkbox"
+              value={c}
+              onChange={(e) => filterMoviesHandler(e)}
+            />
+            {c}
+          </label>
+        ))
+      ) : (
+        <p style={{ fontWeight: "700" }}>
+          Sorry all films are deleted so no more left to display :(
+        </p>
+      )}
+    </fieldset>
   );
 }
 

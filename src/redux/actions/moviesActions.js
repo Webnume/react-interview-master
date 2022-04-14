@@ -20,17 +20,17 @@ export const deleteMovie = (index) => {
   return (dispatch) => {
     dispatch({
       type: "DELETE_MOVIE",
-      payload: index,
+      id: index,
     });
   };
 };
 
-export const filterMovie = (moviesData, moviesCategories) => {
+export const filterMovie = (searchArray) => {
+  // console.log(searchArray);
   return (dispatch) => {
     dispatch({
       type: "FILTER_MOVIE",
-      movies: moviesData,
-      categories: moviesCategories,
+      searchArray,
     });
   };
 };
