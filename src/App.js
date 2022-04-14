@@ -33,27 +33,24 @@ function App() {
    * We're taking the moviesToDisplay array, slicing it into chunks, and then mapping over each
    * chunk to create a MovieCard component for each movie
    */
-  const getData = async () => {
-    const slice = moviesToDisplay.slice(offset, offset + perPage);
-    const postData = slice.map((movie) => (
-      <div key={movie.id} id={movie.id}>
-        <MovieCard movieData={movie} />
-      </div>
-    ));
-    setData(postData);
-    setPageCount(Math.ceil(moviesToDisplay.length / perPage));
-  };
 
   useEffect(() => {
+    const getData = async () => {
+      const slice = moviesToDisplay.slice(offset, offset + perPage);
+      const postData = slice.map((movie) => (
+        <div key={movie.id} id={movie.id}>
+          <MovieCard movieData={movie} />
+        </div>
+      ));
+      setData(postData);
+      setPageCount(Math.ceil(moviesToDisplay.length / perPage));
+    };
     getData();
-  }, []);
-
-  useEffect(() => {
   }, [offset, moviesToDisplay, perPage]);
 
   useEffect(() => {
     dispatch(getMovies());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div className="App">
