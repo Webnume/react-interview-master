@@ -2,7 +2,7 @@
 
 describe("Sportsee", () => {
   beforeEach(() => {
-    cy.visit("https://gallant-kare-abce48.netlify.app/");
+    cy.visit("https://incredible-dango-2228b0.netlify.app/");
     cy.contains("User 2").click();
   });
 

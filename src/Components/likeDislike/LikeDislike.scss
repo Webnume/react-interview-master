@@ -9,7 +9,7 @@
   .like {
     &::before {
       cursor: pointer;
-      font-family: "Font Awesome 5 Free";
+      font-family: "Font Awesome 5 Free", sans-serif;
       display: inline-block;
       content: "\f164";
       padding: 0 0.2rem;
@@ -18,7 +18,7 @@
   .dislike {
     &::before {
       cursor: pointer;
-      font-family: "Font Awesome 5 Free";
+      font-family: "Font Awesome 5 Free", sans-serif;
       content: "\f164";
       display: inline-block;
       transform: rotate(180deg);
