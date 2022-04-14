@@ -46,6 +46,10 @@ function App() {
 
   useEffect(() => {
     getData();
+  }, []);
+
+  useEffect(() => {
+    getData();
   }, [offset, moviesToDisplay, perPage]);
 
   useEffect(() => {
