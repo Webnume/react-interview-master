@@ -45,10 +45,10 @@ function App() {
   };
 
   useEffect(() => {
+    getData();
   }, [offset, moviesToDisplay, perPage]);
 
   useEffect(() => {
-    getData();
     dispatch(getMovies());
   }, []);
 
