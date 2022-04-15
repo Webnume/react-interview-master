@@ -27,7 +27,6 @@ const moviesReducer = (state = initialState, action) => {
         );
         filteredData.push(filteredPartial);
       }
-      // const result = filteredData.reduce((r, e) => (r.push(...e), r), []);
       const result = [].concat.apply([], filteredData);
 
       return {

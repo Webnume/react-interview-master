@@ -63,8 +63,8 @@ function FilterForm() {
   return (
     <fieldset style={{ float: "left" }}>
       <legend>Choose category to show</legend>
-      {!(getAllMoviesCategories().length === 0) ? (
-        getAllMoviesCategories().map((c, i) => (
+      {(getAllMoviesCategories().length !== 0) ? (
+        getAllMoviesCategories().map((c) => (
           <label key={c}>
             <input
               type="checkbox"

@@ -12,8 +12,6 @@ function App() {
 
   const moviesToDisplay = filteredMovies.length > 0 ? filteredMovies : movies;
 
-  // console.log(moviesToDisplay);
-  // console.log(movies);
   const [offset, setOffset] = useState(0);
   const [data, setData] = useState([]);
   const [perPage, setperPage] = useState(4);

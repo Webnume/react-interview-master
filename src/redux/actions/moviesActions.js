@@ -42,7 +42,6 @@ export const deleteMovie = (id) => {
  * @returns An object with a type and a searchArray.
  */
 export const filterMovie = (searchArray) => {
-  // console.log(searchArray);
   return (dispatch) => {
     dispatch({
       type: "FILTER_MOVIE",
