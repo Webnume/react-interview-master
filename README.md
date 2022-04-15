@@ -1,7 +1,7 @@
 # REACT/ REDUX INTERVIEW : 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
-This project was tested with ![Cypress.io](https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/q1cwqhahz7jbtfzalznd)
+This project was tested with [Cypress.io](https://www.cypress.io/)
 
 ## Features Tests To Do
 
@@ -36,7 +36,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
+Launches the test runner in the interactive watch mode for Cypress.\
 
 ### `yarn build`
 
