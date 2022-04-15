@@ -37,7 +37,7 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode for <a href="http://example.com/" target="_blank">Cypress.io</a>.\
+Launches the test runner in the interactive watch mode for <a href="https://www.cypress.io/" target="_blank">Cypress.io</a>.
 
 ### `yarn build`
 
