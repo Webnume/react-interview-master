@@ -1,49 +1,81 @@
-// BarChartActivity.spec.js created with Cypress
+// MyVideoList.spec.js created with Cypress
 
-describe("Sportsee", () => {
+describe("MY VIDEO LIST", () => {
   beforeEach(() => {
     cy.visit("https://incredible-dango-2228b0.netlify.app/");
-    cy.contains("User 2").click();
   });
 
-  it("display header and menu", () => {
-    cy.get(".cardsKeysInfos > :nth-child(1) > img");
-    cy.get("ul > :nth-child(2) > a").contains("Accueil").click();
-    cy.contains("User 2");
+  it("displays the page title", () => {
+    cy.get("h1").contains("MY VIDEO LIST");
   });
 
-  it("display title", () => {
-    cy.get("h1 > span").contains("Cecilia");
+  it("display Comedy movies when i click on Comedy checkbox", () => {
+    cy.get('[type="checkbox"]').check("Comedy");
+    cy.contains("Oceans 8");
+    cy.contains("Midnight Sun");
   });
 
-  it("display BarChartActivity", () => {
-    cy.get(
-      ":nth-child(6) > .recharts-bar-rectangles > :nth-child(1) > :nth-child(4) > .recharts-rectangle"
-    ).trigger("mouseover");
-    cy.get(".recharts-tooltip-wrapper").should("be.visible");
-    cy.contains("70kg 500Kcal");
+  it("display Animation movies when i click on Animation checkbox", () => {
+    cy.get('[type="checkbox"]').check("Animation");
+    cy.contains("Les indestructibles 2");
   });
 
-  it("display LineChartSessions", () => {
-    cy.contains("Durée moyenne des sessions");
+  it("display Thriller movies when i click on Thriller checkbox", () => {
+    cy.get('[type="checkbox"]').check("Thriller");
+    cy.contains("Sans un bruit");
+    cy.contains("Pulp Fiction");
+    cy.contains("Seven");
   });
 
-  it("display RadarChartActivityType", () => {
-    cy.contains("Cardio");
-    cy.contains("Intensité");
-    cy.contains("Vitesse");
-    cy.contains("Force");
-    cy.contains("Endurance");
-    cy.contains("Energie");
+  it("display Drame movies when i click on Drame checkbox", () => {
+    cy.get('[type="checkbox"]').check("Drame");
+    cy.contains("Creed II");
   });
 
-  it("display RadialBarChartScore", () => {
-    cy.contains("Score");
-    cy.contains("30%");
+  it("display Comedy, Animation, Drame movies when i click on Comedy, Animation, Drame checkbox", () => {
+    cy.get('[type="checkbox"]').check("Comedy");
+    cy.get('[type="checkbox"]').check("Animation");
+    cy.get('[type="checkbox"]').check("Drame");
+    cy.contains("Creed II");
+    cy.contains("Oceans 8");
+    cy.contains("Midnight Sun");
+    cy.contains("Les indestructibles 2");
   });
 
-  it("display CardKeyInfo", () => {
-    cy.get(".cardsKeysInfos > :nth-child(1) > img");
-    cy.contains("2.5kCalCalories");
+  
+  it("display 4 movies movies per default", () => {
+    cy.contains("Oceans 8");
+    cy.contains("Midnight Sun");
+    cy.contains("Sans un bruit");
+    cy.contains("Les indestructibles 2");
   });
+
+  it("display 8 movies movies when 8 per page is chosen", () => {
+    cy.get(".per-page > :nth-child(2)").click()
+    cy.contains("Oceans 8");
+    cy.contains("Midnight Sun");
+    cy.contains("Sans un bruit");
+    cy.contains("Les indestructibles 2");
+    cy.contains("Creed II");
+    cy.contains("Pulp Fiction");
+    cy.contains("Pulp Fiction");
+    cy.contains("Seven");
+  });
+
+  it("display 10 movies movies when 12 per page is chosen", () => {
+    cy.get(".per-page > :nth-child(3)").click()
+    cy.contains("Oceans 8");
+    cy.contains("Midnight Sun");
+    cy.contains("Sans un bruit");
+    cy.contains("Les indestructibles 2");
+    cy.contains("Creed II");
+    cy.contains("Pulp Fiction");
+    cy.contains("Pulp Fiction");
+    cy.contains("Seven");
+    cy.contains("Inception");
+    cy.contains("Gone Girl");
+  });
+
+
+
 });
