@@ -1,7 +1,8 @@
 # REACT/ REDUX INTERVIEW : 
-
+[Live Demo](https://incredible-dango-2228b0.netlify.app/)\
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
-This project was tested with [Cypress.io](https://www.cypress.io/)
+This project was tested with [Cypress.io](https://www.cypress.io/)\
+this project quality was with [Sonarcloud.io](https://sonarcloud.io/summary/overall?id=Webnume_react-interview-master)
 
 ## Features Tests To Do
 
