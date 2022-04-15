@@ -1,7 +1,7 @@
 # REACT/ REDUX INTERVIEW : 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
+This project was tested with ![Cypress.io](https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_170,w_170,f_auto,b_white,q_auto:eco,dpr_1/q1cwqhahz7jbtfzalznd)
 
 ## Features Tests To Do
 
