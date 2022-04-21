@@ -1,4 +1,3 @@
-import React from "react";
 import "./MovieCard.scss";
 import { useDispatch } from "react-redux";
 import { deleteMovie } from "../../redux/actions/moviesActions";
@@ -10,15 +9,19 @@ import { LikeDislike } from "../likeDislike/LikeDislike";
  * @returns A React component that renders a movie card.
  */
 function MovieCard({ movieData }) {
-  const { id, title, category } = movieData;
+  const { id, title, category, cover } = movieData;
   const dispatch = useDispatch();
+
   return (
-    <section className="movie">
+    <section
+      className="movie"
+      style={{
+        backgroundImage: "url(" + cover + ")",
+      }}
+    >
       <h2>{title}</h2>
       <span className="close" onClick={() => dispatch(deleteMovie(id))}></span>
-      <div className="category">
-        {category}
-      </div>
+      <div className="category">{category}</div>
       <LikeDislike initialState={movieData} />
     </section>
   );

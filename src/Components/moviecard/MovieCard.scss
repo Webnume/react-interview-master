@@ -17,20 +17,25 @@
     display: flex;
     margin: 1rem;
     padding: 1rem;
-    background-color: rgb(218, 216, 216);
+    // background-color: rgb(218, 216, 216);
     justify-content: center;
     flex-wrap: wrap;
     flex-direction: column;
     width: 30vw;
     height: 20vh;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+    border: 1px solid #47ccde;
     @media screen and (max-width: 700px) {
       width: 60vw;
     }
     h2 {
       font-weight: bold;
       color: rgb(109, 101, 101);
-      background-color: aliceblue;
+      background-color: #f0f8ff99;
       padding: 0.4rem;
+      width: fit-content;
     }
     .close {
       cursor: pointer;

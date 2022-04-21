@@ -6,6 +6,7 @@ import FilterForm from "./Components/filterForm/FilterForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovies } from "./redux/actions/moviesActions";
 
+
 function App() {
   const dispatch = useDispatch();
   const { movies, filteredMovies } = useSelector((state) => state.movies);
@@ -31,13 +32,15 @@ function App() {
    * We're taking the moviesToDisplay array, slicing it into chunks, and then mapping over each
    * chunk to create a MovieCard component for each movie
    */
-
   useEffect(() => {
     const getData = async () => {
       const slice = moviesToDisplay.slice(offset, offset + perPage);
       const postData = slice.map((movie) => (
         <div key={movie.id} id={movie.id}>
-          <MovieCard movieData={movie} />
+          <MovieCard
+            movieData={movie}
+            imageTitle={movie.title_english ? movie.title_english : movie.title}
+          />
         </div>
       ));
       setData(postData);
@@ -53,6 +56,7 @@ function App() {
   return (
     <div className="App">
       <h1>MY VIDEO LIST</h1>
+      
       <FilterForm moviesData={moviesToDisplay} />
       {moviesToDisplay.length > 0 && (
         <ul className="per-page">
