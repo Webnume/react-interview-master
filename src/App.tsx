@@ -5,11 +5,12 @@ import MovieCard from "./Components/moviecard/MovieCard";
 import FilterForm from "./Components/filterForm/FilterForm";
 import { useDispatch, useSelector } from "react-redux";
 import { getMovies } from "./redux/actions/moviesActions";
+import { RootState } from "./redux/reducers/rootReducer";
 
 
 function App() {
   const dispatch = useDispatch();
-  const { movies, filteredMovies } = useSelector((state) => state.movies);
+  const { movies, filteredMovies } = useSelector((state: RootState) => state.movies);
 
   const moviesToDisplay = filteredMovies.length > 0 ? filteredMovies : movies;
 
@@ -23,7 +24,7 @@ function App() {
    * selected page number plus one
    * @param e - The event object
    */
-  const handlePageClick = (e) => {
+  const handlePageClick = (e:any) => {
     const selectedPage = e.selected;
     setOffset(selectedPage + 1);
   };
@@ -35,11 +36,11 @@ function App() {
   useEffect(() => {
     const getData = async () => {
       const slice = moviesToDisplay.slice(offset, offset + perPage);
-      const postData = slice.map((movie) => (
+      const postData = slice.map((movie:any) => (
         <div key={movie.id} id={movie.id}>
           <MovieCard
             movieData={movie}
-            imageTitle={movie.title_english ? movie.title_english : movie.title}
+            // imageTitle={movie.title_english ? movie.title_english : movie.title}
           />
         </div>
       ));
@@ -53,11 +54,11 @@ function App() {
     dispatch(getMovies());
   }, [dispatch]);
 
-  return (
+    return (
     <div className="App">
       <h1>MY VIDEO LIST</h1>
       
-      <FilterForm moviesData={moviesToDisplay} />
+      <FilterForm />
       {moviesToDisplay.length > 0 && (
         <ul className="per-page">
           Afficher les résultats par

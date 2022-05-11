@@ -1,9 +1,21 @@
-const initialState = {
+import { AnyAction } from "redux";
+
+interface IMovie {
+  id: number;
+  category: string;
+}
+
+interface MoviesState {
+  movies: IMovie[];
+  filteredMovies: IMovie[];
+}
+
+const initialState: MoviesState = {
   movies: [],
   filteredMovies: [],
 };
 
-const moviesReducer = (state = initialState, action) => {
+const moviesReducer = (state = initialState, action: AnyAction) => {
   switch (action.type) {
     case "GET_MOVIE":
       return {
@@ -27,13 +39,13 @@ const moviesReducer = (state = initialState, action) => {
         );
         filteredData.push(filteredPartial);
       }
-      const result = [].concat.apply([], filteredData);
+      
+      const result = ([] as any[]).concat.apply([], filteredData);
 
       return {
         ...state,
         filteredMovies: result,
       };
-
     default:
       return state;
   }

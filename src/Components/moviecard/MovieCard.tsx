@@ -8,7 +8,7 @@ import { LikeDislike } from "../likeDislike/LikeDislike";
  * close button, a category, and a LikeDislike component.
  * @returns A React component that renders a movie card.
  */
-function MovieCard({ movieData }) {
+function MovieCard({ movieData }:{movieData:{id:number, title:string, category:string, cover:string}}) {
   const { id, title, category, cover } = movieData;
   const dispatch = useDispatch();
 
