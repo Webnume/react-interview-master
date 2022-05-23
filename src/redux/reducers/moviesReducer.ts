@@ -39,7 +39,7 @@ const moviesReducer = (state = initialState, action: AnyAction) => {
         );
         filteredData.push(filteredPartial);
       }
-      
+
       const result = ([] as any[]).concat.apply([], filteredData);
 
       return {

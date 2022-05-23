@@ -7,26 +7,27 @@ import { useDispatch, useSelector } from "react-redux";
 import { getMovies } from "./redux/actions/moviesActions";
 import { RootState } from "./redux/reducers/rootReducer";
 
-
 function App() {
   const dispatch = useDispatch();
-  const { movies, filteredMovies } = useSelector((state: RootState) => state.movies);
+  const { movies, filteredMovies } = useSelector(
+    (state: RootState) => state.movies
+  );
 
   const moviesToDisplay = filteredMovies.length > 0 ? filteredMovies : movies;
 
   const [offset, setOffset] = useState(0);
   const [data, setData] = useState([]);
   const [perPage, setperPage] = useState(4);
-  const [pageCount, setPageCount] = useState(0);
+  const [pageCount, setPageCount] = useState(1);
 
   /**
    * It takes the selected page number from the pagination component and sets the offset state to the
    * selected page number plus one
    * @param e - The event object
    */
-  const handlePageClick = (e:any) => {
-    const selectedPage = e.selected;
-    setOffset(selectedPage + 1);
+  const handlePageClick = (e: any) => {
+    const newOffset = (e.selected * perPage) % moviesToDisplay.length;
+    setOffset(newOffset);
   };
 
   /**
@@ -35,8 +36,8 @@ function App() {
    */
   useEffect(() => {
     const getData = async () => {
-      const slice = moviesToDisplay.slice(offset, offset + perPage);
-      const postData = slice.map((movie:any) => (
+      const slicedMovies = moviesToDisplay.slice(offset, offset + perPage);
+      const postData = slicedMovies.map((movie: any) => (
         <div key={movie.id} id={movie.id}>
           <MovieCard
             movieData={movie}
@@ -46,18 +47,18 @@ function App() {
       ));
       setData(postData);
       setPageCount(Math.ceil(moviesToDisplay.length / perPage));
+      console.log(offset, pageCount, moviesToDisplay, slicedMovies, postData);
     };
     getData();
-  }, [offset, moviesToDisplay, perPage]);
+  }, [offset, moviesToDisplay, perPage, pageCount]);
 
   useEffect(() => {
     dispatch(getMovies());
   }, [dispatch]);
 
-    return (
+  return (
     <div className="App">
       <h1>MY VIDEO LIST</h1>
-      
       <FilterForm />
       {moviesToDisplay.length > 0 && (
         <ul className="per-page">
@@ -75,8 +76,8 @@ function App() {
           breakLabel={"..."}
           breakClassName={"break-me"}
           pageCount={pageCount}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
+          marginPagesDisplayed={3}
+          pageRangeDisplayed={2}
           onPageChange={handlePageClick}
           containerClassName={"pagination"}
           activeClassName={"active"}
