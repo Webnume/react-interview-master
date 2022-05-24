@@ -25,7 +25,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "tsc",
+    "build": "react-scripts build",
+    "tsc":"tsc",
     "test": "cypress open",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006 -s public",
